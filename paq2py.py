@@ -1,5 +1,6 @@
 """
 paq2py
+Read binary *.paq file (from PackIO) into python
 Lloyd Russell 2015
 """
 
@@ -8,24 +9,33 @@ import numpy as np
 
 def paq_read(file_path=None, plot=False):
     """
-    Read binary *.paq file (from PackIO)
+    Read binary *.paq file (from PackIO) into python
     Lloyd Russell 2015
 
     Parameters
     ----------
     file_path : str
-        path to file to read in. if none supplied use GUI load dialog,
-        buggy on mac osx - Tk/matplotlib.
+        full path to file to read in. if none is supplied a load file dialog
+        is opened, buggy on mac osx - Tk/matplotlib. (optional, default=None)
     plot : bool
-        plot the read data? (optional, default = False)
+        plot the data after reading? (optional, default=False)
 
     Returns
     -------
     data : ndarray
-    chan_names : list
-    units : list
+        the data as a m-by-n array where m is the number of channels and n is
+        the number of datapoints
+    chan_names : list of str
+        the names of the channels provided in PackIO
+    hw_chans : list of str
+        the hardware lines corresponding to each channel
+    units : list of str
+        the units of measurment for each channel
     rate : int
+        the acquisition sample rate, in Hz
     """
+
+    # file load gui
     if file_path is None:
         import Tkinter
         import tkFileDialog
@@ -78,15 +88,15 @@ def paq_read(file_path=None, plot=False):
     # close file
     fid.close()
 
+    # plot
     if plot:
         import matplotlib.pylab as plt
         f, axes = plt.subplots(num_chans, 1, sharex=True)
         for idx, ax in enumerate(axes):
             ax.plot(data[idx])
             ax.set_xlim([0, num_datapoints-1])
-            # ax.xticks(range(num_datapoints), range(num_datapoints/rate))
             ax.set_ylabel(units[idx])
             ax.set_title(chan_names[idx])
         plt.show()
 
-    return data, chan_names, units, rate
+    return data, chan_names, hw_chans, units, rate
