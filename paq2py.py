@@ -30,7 +30,7 @@ def paq_read(file_path=None, plot=False):
     hw_chans : list of str
         the hardware lines corresponding to each channel
     units : list of str
-        the units of measurment for each channel
+        the units of measurement for each channel
     rate : int
         the acquisition sample rate, in Hz
     """
