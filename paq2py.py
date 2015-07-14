@@ -99,4 +99,8 @@ def paq_read(file_path=None, plot=False):
             ax.set_title(chan_names[idx])
         plt.show()
 
-    return data, chan_names, hw_chans, units, rate
+    return {"data": data, 
+            "chan_names": chan_names,
+            "hw_chans": hw_chans,
+            "units": units,
+            "rate": rate}
