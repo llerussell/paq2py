@@ -1,6 +1,6 @@
 """
 paq2py
-Read binary *.paq file (from PackIO) into python
+Read PAQ file (from PackIO) into python
 Lloyd Russell 2015
 """
 
@@ -9,19 +9,19 @@ import numpy as np
 
 def paq_read(file_path=None, plot=False):
     """
-    Read binary *.paq file (from PackIO) into python
+    Read PAQ file (from PackIO) into python
     Lloyd Russell 2015
 
     Parameters
-    ----------
-    file_path : str
+    ==========
+    file_path : str, optional
         full path to file to read in. if none is supplied a load file dialog
-        is opened, buggy on mac osx - Tk/matplotlib. (optional, default=None)
-    plot : bool
-        plot the data after reading? (optional, default=False)
+        is opened, buggy on mac osx - Tk/matplotlib. Default: None.
+    plot : bool, optional
+        plot the data after reading? Default: False.
 
     Returns
-    -------
+    =======
     data : ndarray
         the data as a m-by-n array where m is the number of channels and n is
         the number of datapoints
