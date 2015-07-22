@@ -1,5 +1,5 @@
 # paq2py
-PackIO, a National Instruments DAQ interface written by Adam Packer is used to synchronise and record inputs and outputs from multiple National Instruments devices. The recorded data is saved as binary 'PAQ' files. This python module reads in PAQ files and returns the data as a channel-by-samples numpy array. Channel names, hardware lines and acquisition settings are also returned.
+[PackIO](http://www.packio.org), a National Instruments DAQ interface written by Adam Packer is used to synchronise and record inputs and outputs from multiple National Instruments devices. The recorded data is saved as binary 'PAQ' files. This python module reads in PAQ files and returns the data as a channel-by-samples numpy array. Channel names, hardware lines and acquisition settings are also returned.
 
 #### dependencies
 * numpy
