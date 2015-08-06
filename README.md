@@ -27,4 +27,7 @@ paq['chan_names'][0]
 
 # channel 0 data
 paq['data'][0]
+
+# acquisition rate (Hz)
+paq['rate']
 ```
