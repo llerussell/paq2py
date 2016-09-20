@@ -11,7 +11,6 @@ def paq_read(file_path=None, plot=False):
     """
     Read PAQ file (from PackIO) into python
     Lloyd Russell 2015
-
     Parameters
     ==========
     file_path : str, optional
@@ -19,7 +18,6 @@ def paq_read(file_path=None, plot=False):
         is opened, buggy on mac osx - Tk/matplotlib. Default: None.
     plot : bool, optional
         plot the data after reading? Default: False.
-
     Returns
     =======
     data : ndarray
@@ -90,13 +88,17 @@ def paq_read(file_path=None, plot=False):
 
     # plot
     if plot:
-        import matplotlib.pylab as plt
-        f, axes = plt.subplots(num_chans, 1, sharex=True)
+        # import matplotlib
+        # matplotlib.use('QT4Agg')
+        import matplotlib.pylab as plt 
+        f, axes = plt.subplots(num_chans, 1, sharex=True, figsize=(10,num_chans), frameon=False)
         for idx, ax in enumerate(axes):
             ax.plot(data[idx])
             ax.set_xlim([0, num_datapoints-1])
-            ax.set_ylabel(units[idx])
+            ax.set_ylim([data[idx].min()-1, data[idx].max()+1])
+            # ax.set_ylabel(units[idx])
             ax.set_title(chan_names[idx])
+        plt.tight_layout()
         plt.show()
 
     return {"data": data, 
