@@ -80,7 +80,7 @@ def paq_read(file_path=None, plot=False):
 
     # get data
     temp_data = np.fromfile(fid, dtype='>f', count=-1)
-    num_datapoints = len(temp_data)/num_chans
+    num_datapoints = int(len(temp_data)/num_chans)
     data = np.reshape(temp_data, [num_datapoints, num_chans]).transpose()
 
     # close file
