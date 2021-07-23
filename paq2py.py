@@ -57,7 +57,11 @@ def paq_read(file_path=None, plot=False):
         num_chars = int(np.fromfile(fid, dtype='>f', count=1))
         chan_name = ''
         for j in range(num_chars):
-            chan_name = chan_name + chr(np.fromfile(fid, dtype='>f', count=1))
+            try:
+                chan_name = chan_name + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
+            except TypeError:
+                chan_name = chan_name + chr(np.fromfile(fid, dtype='>f', count=1))
+
         chan_names.append(chan_name)
 
     # get channel hardware lines
@@ -66,7 +70,10 @@ def paq_read(file_path=None, plot=False):
         num_chars = int(np.fromfile(fid, dtype='>f', count=1))
         hw_chan = ''
         for j in range(num_chars):
-            hw_chan = hw_chan + chr(np.fromfile(fid, dtype='>f', count=1))
+            try:
+                hw_chan = hw_chan + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
+            except TypeError:
+                hw_chan = hw_chan + chr(np.fromfile(fid, dtype='>f', count=1))
         hw_chans.append(hw_chan)
 
     # get acquisition units
@@ -75,7 +82,10 @@ def paq_read(file_path=None, plot=False):
         num_chars = int(np.fromfile(fid, dtype='>f', count=1))
         unit = ''
         for j in range(num_chars):
-            unit = unit + chr(np.fromfile(fid, dtype='>f', count=1))
+            try:
+                unit = unit + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
+            except TypeError:
+                unit = unit + chr(np.fromfile(fid, dtype='>f', count=1))
         units.append(unit)
 
     # get data
@@ -91,7 +101,7 @@ def paq_read(file_path=None, plot=False):
         # import matplotlib
         # matplotlib.use('QT4Agg')
         import matplotlib.pylab as plt 
-        f, axes = plt.subplots(num_chans, 1, sharex=True, figsize=(10,num_chans), frameon=False)
+        f, axes = plt.subplots(num_chans, 1, sharex=True, figsize=(10, num_chans), frameon=False)
         for idx, ax in enumerate(axes):
             ax.plot(data[idx])
             ax.set_xlim([0, num_datapoints-1])
@@ -106,3 +116,5 @@ def paq_read(file_path=None, plot=False):
             "hw_chans": hw_chans,
             "units": units,
             "rate": rate}
+
+paq_read(file_path='/home/pshah/mnt/qnap/Data/2020-12-12/2020-12-12_RL95_003.paq', plot=True)
