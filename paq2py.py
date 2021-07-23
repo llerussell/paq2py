@@ -58,9 +58,9 @@ def paq_read(file_path=None, plot=False):
         chan_name = ''
         for j in range(num_chars):
             try:
-                chan_name = chan_name + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
-            except TypeError:
                 chan_name = chan_name + chr(np.fromfile(fid, dtype='>f', count=1))
+            except TypeError:
+                chan_name = chan_name + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
 
         chan_names.append(chan_name)
 
@@ -71,9 +71,9 @@ def paq_read(file_path=None, plot=False):
         hw_chan = ''
         for j in range(num_chars):
             try:
-                hw_chan = hw_chan + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
-            except TypeError:
                 hw_chan = hw_chan + chr(np.fromfile(fid, dtype='>f', count=1))
+            except TypeError:
+                hw_chan = hw_chan + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
         hw_chans.append(hw_chan)
 
     # get acquisition units
@@ -83,9 +83,9 @@ def paq_read(file_path=None, plot=False):
         unit = ''
         for j in range(num_chars):
             try:
-                unit = unit + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
-            except TypeError:
                 unit = unit + chr(np.fromfile(fid, dtype='>f', count=1))
+            except TypeError:
+                unit = unit + chr(int(np.fromfile(fid, dtype='>f', count=1)[0]))
         units.append(unit)
 
     # get data
@@ -116,5 +116,3 @@ def paq_read(file_path=None, plot=False):
             "hw_chans": hw_chans,
             "units": units,
             "rate": rate}
-
-paq_read(file_path='/home/pshah/mnt/qnap/Data/2020-12-12/2020-12-12_RL95_003.paq', plot=True)
